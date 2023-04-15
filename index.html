@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Temperature Converter</title>
+	<style>
+		/* CSS styles for the temperature converter */
+		body {
+			font-family: Arial, sans-serif;
+			text-align: center;
+		}
+		h1 {
+			margin-top: 50px;
+			margin-bottom: 20px;
+		}
+		form {
+			margin-bottom: 50px;
+		}
+		label {
+			display: block;
+			margin-bottom: 10px;
+		}
+		input[type="number"] {
+			padding: 5px;
+			border-radius: 5px;
+			border: none;
+			box-shadow: 2px 2px 2px #ccc;
+			width: 150px;
+		}
+		select {
+			padding: 5px;
+			border-radius: 5px;
+			border: none;
+			box-shadow: 2px 2px 2px #ccc;
+			margin-left: 10px;
+			width: 150px;
+		}
+		button {
+			padding: 5px;
+			border-radius: 5px;
+			border: none;
+			background-color: #0077cc;
+			color: #fff;
+			box-shadow: 2px 2px 2px #ccc;
+			cursor: pointer;
+			width: 150px;
+		}
+		button:hover {
+			background-color: #005ea6;
+		}
+		p {
+			margin-top: 20px;
+			font-weight: bold;
+		}
+	</style>
+</head>
+<body>
+	<h1>Temperature Converter</h1>
+	<form>
+		<label for="temperature">Enter temperature:</label>
+		<input type="number" id="temperature" name="temperature" required>
+		<select id="temperature-type-1" name="temperature-type-1">
+			<option value="celsius">Celsius</option>
+			<option value="fahrenheit">Fahrenheit</option>
+			<option value="kelvin">Kelvin</option>
+		</select>
+		<label for="temperature-type-2">Convert to:</label>
+		<select id="temperature-type-2" name="temperature-type-2">
+			<option value="celsius">Celsius</option>
+			<option value="fahrenheit">Fahrenheit</option>
+			<option value="kelvin">Kelvin</option>
+		</select>
+		<button type="button" onclick="convertTemperature()">Convert</button>
+	</form>
+	<p id="result"></p>
+	<script>
+		// JavaScript code for the temperature converter
+		function convertTemperature() {
+			let temperature = parseFloat(document.getElementById("temperature").value);
+			let temperatureType1 = document.getElementById("temperature-type-1").value;
+			let temperatureType2 = document.getElementById("temperature-type-2").value;
+			let result = "";
+		
+			if (temperatureType1 === "celsius") {
+				if (temperatureType2 === "fahrenheit") {
+					result = ((temperature * 9/5) + 32).toFixed(2) + " &deg;F";
+				} else if (temperatureType2 === "kelvin") {
+					result = (temperature + 273.15).toFixed(2) + " K";
+				} else {
+					result = temperature.toFixed(2) + " &deg;C";
+				}
+			} else if (temperatureType1 === "fahrenheit") {
+				if (temperatureType2 === "celsius") {
+					result = ((temperature - 32) * 5/9).toFixed(2) + " &deg;C";
+				} else if (temperatureType2 === "kelvin") {
+					result = (((temperature - 32) * 5/9) + 273.15).toFixed(2) + " K";
+				} else {
+					result = temperature.toFixed(2) + " &deg;F";
+				}
+			} else if (temperatureType1 === "kelvin") {
+				if (temperatureType2 === "celsius") {
+					result = (temperature - 273.15).toFixed(2) + " &deg;C";
+				} else if (temperatureType2 === "fahrenheit") {
+					result = (((temperature - 273.15) * 9/5) + 32).toFixed(2) + " &deg;F";
+				} else {
+					result = temperature.toFixed(2) + " K";
+				}
+			}
+		
+			document.getElementById("result").innerHTML = "Result: " + result;
+		}
+	</script>
+</body>
+</html>
